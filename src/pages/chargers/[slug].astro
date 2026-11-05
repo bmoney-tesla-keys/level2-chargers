@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { connectorLabel, formatDate, withBase } from '../../lib/paths';
+
+export async function getStaticPaths() {
+	const chargers = await getCollection('chargers');
+	return chargers.map((charger) => ({
+		params: { slug: charger.data.slug },
+		props: { charger },
+	}));
+}
+
+const { charger } = Astro.props;
+const { Content } = await render(charger);
+const { data } = charger;
+const priceLabel =
+	data.approxPriceUsd === null || data.approxPriceUsd === undefined
+		? 'Not stated here'
+		: `About $${data.approxPriceUsd}`;
+---
+
+<BaseLayout title={data.title} description={data.summary} canonicalPath={`chargers/${data.slug}/`}>
+	<article class="article">
+		<p class="byline">
+			<a href={withBase()}>Directory</a>
+			<span aria-hidden="true"> / </span>
+			{data.brand}
+		</p>
+		<h1 class="page-title">{data.title}</h1>
+		<p class="lede">{data.summary}</p>
+		<p class="byline">Last updated {formatDate(data.lastUpdated)}</p>
+
+		<dl class="spec-grid">
+			<div class="spec">
+				<dt>Brand / model</dt>
+				<dd>{data.brand} {data.model}</dd>
+			</div>
+			<div class="spec">
+				<dt>Amperage</dt>
+				<dd>{data.amperage}</dd>
+			</div>
+			<div class="spec">
+				<dt>Connector</dt>
+				<dd>{connectorLabel(data.connector)}</dd>
+			</div>
+			<div class="spec">
+				<dt>Smart features</dt>
+				<dd>{data.smart ? 'Yes (Wi-Fi / app)' : 'No'}</dd>
+			</div>
+			<div class="spec">
+				<dt>Approximate price</dt>
+				<dd>{priceLabel}</dd>
+			</div>
+			<div class="spec">
+				<dt>Affiliate links on this page</dt>
+				<dd>{data.affiliateDisclosure ? 'May include affiliate links' : 'None yet'}</dd>
+			</div>
+		</dl>
+
+		<p class="note">{data.verdict}</p>
+
+		<Content />
+
+		{
+			data.buyUrl && (
+				<p>
+					<strong>Where to read the official product page:</strong>{' '}
+					<a href={data.buyUrl} rel="noopener noreferrer">
+						{data.brand} manufacturer page
+					</a>
+					{data.affiliateDisclosure ? '.' : ' (not an affiliate link).'}
+				</p>
+			)
+		}
+
+		<h2>Sources</h2>
+		<ul class="sources">
+			{
+				data.sources.map((source) => (
+					<li>
+						<a href={source.url} rel="noopener noreferrer">
+							{source.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</article>
+</BaseLayout>

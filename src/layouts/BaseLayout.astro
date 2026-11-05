@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import { withBase } from '../lib/paths';
+
+interface Props {
+	title: string;
+	description?: string;
+	canonicalPath?: string;
+}
+
+const {
+	title,
+	description = 'A curated directory of home Level 2 EVSE units, with sourced specs and independent reviews.',
+	canonicalPath = '',
+} = Astro.props;
+
+const pageTitle = title.includes('Level 2 Home EV Chargers')
+	? title
+	: `${title} — Level 2 Home EV Chargers`;
+const canonical = new URL(withBase(canonicalPath), Astro.site);
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical.href} />
+		<title>{pageTitle}</title>
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="wrap">
+				<a class="brand" href={withBase()}>
+					<strong>Level 2 Home EV Chargers</strong>
+					<span>A curated directory of home Level 2 EVSE units.</span>
+				</a>
+				<nav class="nav" aria-label="Primary">
+					<a href={withBase()} aria-current={path.endsWith('/level2-chargers/') || path.endsWith('/level2-chargers') ? 'page' : undefined}>Directory</a>
+					<a href={withBase('about/')} aria-current={path.includes('/about') ? 'page' : undefined}>How we review</a>
+				</nav>
+			</div>
+		</header>
+		<main>
+			<div class="wrap">
+				<slot />
+			</div>
+		</main>
+		<footer class="site-footer">
+			<div class="wrap">
+				<p>Some links may be affiliate links. We may earn a commission at no extra cost to you.</p>
+				<p>
+					Manufacturer product pages and review citations are labeled as such. We do not invent specs, prices, ratings, or traffic figures.
+				</p>
+			</div>
+		</footer>
+	</body>
+</html>

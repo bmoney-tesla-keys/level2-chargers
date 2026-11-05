@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="How we review"
+	description="How Level 2 Home EV Chargers sources specs, writes verdicts, and handles affiliate links."
+	canonicalPath="about/"
+>
+	<article class="article">
+		<h1 class="page-title">How we review</h1>
+		<p class="lede">
+			This is a small, sourced directory of home Level 2 EV charging stations (EVSE). It is
+			not a lab test program and not a shopping ranking with invented scores.
+		</p>
+
+		<h2>What a page has to include</h2>
+		<ul>
+			<li>Who the unit is for, in plain language.</li>
+			<li>Key specs — amperage, connector, cable length, install options, smart features — only when a cited source states them.</li>
+			<li>An honest verdict drawn from those sources, including drawbacks.</li>
+			<li>A sources list with real URLs.</li>
+		</ul>
+
+		<h2>Where facts come from</h2>
+		<p>
+			Every charger page should cite the manufacturer (product page, datasheet, or install guide)
+			plus at least two independent reviews when they exist. Preferred independent outlets include
+			Wirecutter, CNET, and Car and Driver. If a review is paywalled or blocked, we do not
+			paraphrase it from a third-party summary.
+		</p>
+		<p>
+			Manufacturer range-per-hour figures are estimates. They depend on the vehicle, weather,
+			and the circuit the unit is set to. We label them as manufacturer estimates.
+		</p>
+
+		<h2>What we will not invent</h2>
+		<ul>
+			<li>Specs, prices, star ratings, or traffic numbers.</li>
+			<li>A current street price when listings disagree or a review widget shows a live marketplace figure. In those cases <code>approxPriceUsd</code> stays empty.</li>
+			<li>Affiliate checkout links. Until a program is approved, buy links go only to the manufacturer and are labeled as non-affiliate.</li>
+		</ul>
+
+		<h2>Corrections</h2>
+		<p>
+			If a manufacturer updates a datasheet or a cited review changes, the page should be revised
+			and the <code>lastUpdated</code> date changed. Old prices from reviews stay attributed to
+			that review; they are not treated as today’s price.
+		</p>
+	</article>
+</BaseLayout>

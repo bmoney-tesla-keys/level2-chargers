@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { connectorLabel, formatDate, withBase } from '../lib/paths';
+
+const chargers = (await getCollection('chargers')).sort((a, b) =>
+	a.data.title.localeCompare(b.data.title),
+);
+---
+
+<BaseLayout
+	title="Level 2 Home EV Chargers"
+	description="A curated directory of home Level 2 EVSE units. Specs and verdicts come from manufacturer documents and independent reviews — not invented numbers."
+	canonicalPath=""
+>
+	<h1 class="page-title">Level 2 Home EV Chargers</h1>
+	<p class="lede">
+		A curated directory of home Level 2 EVSE units. Each page cites the manufacturer and
+		independent reviews. We leave price blank unless a source states one we can stand behind,
+		and we do not invent ratings or traffic.
+	</p>
+
+	{chargers.length === 0 ? (
+		<p>No chargers published yet.</p>
+	) : (
+		<ul class="charger-list">
+			{
+				chargers.map((charger) => (
+					<li>
+						<a class="charger-card" href={withBase(`chargers/${charger.data.slug}/`)}>
+							<h2>{charger.data.title}</h2>
+							<p>{charger.data.summary}</p>
+							<ul class="meta">
+								<li class="pill">{charger.data.amperage}</li>
+								<li class="pill">{connectorLabel(charger.data.connector)}</li>
+								<li class="pill">{charger.data.smart ? 'Smart / Wi-Fi' : 'Not a smart charger'}</li>
+								<li class="pill">Updated {formatDate(charger.data.lastUpdated)}</li>
+							</ul>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	)}
+</BaseLayout>
