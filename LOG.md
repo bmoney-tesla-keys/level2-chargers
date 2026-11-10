@@ -23,3 +23,10 @@
 - **Path:** `/chargers/wallbox-pulsar-plus/`
 - **File:** `src/content/chargers/wallbox-pulsar-plus.md`
 - **Notes:** Next SEED model after Grizzl-E Classic. Specs from Wallbox US product page, shop collection, and August 2023 NA technical datasheet (9.6 kW / 40 A plug-in or hardwired; 11.5 kW / 48 A hardwired; 25 ft cable; NEMA Type 4; Wi-Fi/Bluetooth). Independent sources: Car and Driver (hands-on roundup updated November 2, 2026) and MotorTrend (January 4, 2023 Pulsar Plus review). Flagged operating-temp mismatch (datasheet 104 °F vs shop FAQ 122 °F) and Power Meter price disagreement across Car and Driver ($449), MotorTrend ($279), and Wallbox ($299). `approxPriceUsd` is 650 from manufacturer starting $649.99. Buy link is the manufacturer page only (not an affiliate link). Draft branch `draft/wallbox-pulsar-plus`; nothing merged to main until B Money replies publish.
+
+## 2026-11-07 (America/New_York)
+
+- **Page drafted:** Autel MaxiCharger AC Elite Home
+- **Path:** `/chargers/autel-maxicharger-ac-elite-home/`
+- **File:** `src/content/chargers/autel-maxicharger-ac-elite-home.md`
+- **Notes:** Next SEED model after Wallbox Pulsar Plus. Specs from Autel’s March 8, 2024 Elite Home datasheet (9.6 kW / 40 A plug-in or 12 kW / 50 A hardwired; 25 ft J1772; NEMA 4; app-adjustable 6 A to rated current; 36-month warranty) plus Autel Energy US 40A ($559) and 50A ($599) product pages. Independent sources: CNET (security-features pick for the 50A) and The Gadgeteer (July 14, 2023 40A hands-on). Flagged enclosure mismatch (datasheet/US pages NEMA 4 vs store IP65/NEMA 4X), app current floor (6 A vs store 16–50 A), and 50A price disagreement ($599 on autelenergy.us vs $525/18% off on store.autelenergy.com). Did not cite MotorTrend’s Elite-URL review because its current text covers AC Lite Home at different list prices. `approxPriceUsd` is 559 from the manufacturer 40A regular price. Buy link is the manufacturer 50A page only (not an affiliate link). Draft branch `draft/autel-maxicharger-ac-elite-home`; nothing merged to main until B Money replies publish.
